@@ -120,7 +120,7 @@ function s3syncer(db, options) {
       var headers = xtend({
           'x-amz-acl': options.acl
         , 'x-amz-meta-syncfilehash': details.md5
-        , 'Content-Type': mime.lookup(absolute)
+        , 'Content-Type': details.contentType || mime.lookup(absolute)
       }, options.headers)
 
       client.putFile(absolute, relative, headers, function(err, res) {
